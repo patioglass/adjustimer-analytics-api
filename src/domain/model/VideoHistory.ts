@@ -12,7 +12,7 @@ export class VideoHistory {
     private video_url: string
     @Column('varchar', { name: 'user_id' })
     private user_id: string
-    @Column('date', {  name: 'create_date'})
+    @Column('datetime', {  name: 'create_date'})
     private create_date: Date | undefined
 
     constructor(title: string, videoServiceType: number, url: string, userId: string, createDate: Date) {
