@@ -7,6 +7,8 @@ import { VideoHistory } from "../../domain/model/VideoHistory";
 import { TypeOrmConnection } from "../../infrastructure/db/TypeOrmConnection";
 import { BadRequestException } from "../../exception/HttpErrorException";
 
+import { DateTime } from 'luxon'
+
 class VideoHistoryController {
     private videoHistoryRepository: VideoHistoryRepository
     private videoHistorySerializer: VideoHistorySerializer
@@ -37,9 +39,8 @@ class VideoHistoryController {
                     reqBody.videoTitle,
                     reqBody.videoServiceType,
                     reqBody.videoUrl,
-                    reqBody.videoUrlUnique,
                     reqBody.userId,
-                    new Date()
+                    DateTime.now().toJSDate()
                 )
                 const result = await this.videoHistoryService.createVideoHistory(newVideoHistory)
                 return this.videoHistorySerializer.videoHistory(result)

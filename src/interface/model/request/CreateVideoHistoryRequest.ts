@@ -4,7 +4,6 @@ interface Params {
     video_title: string
     video_service_type: number
     video_url: string
-    video_url_unique: string
     user_id: string
 }
 
@@ -24,14 +23,12 @@ export class CreateVideoHistoryRequest {
      */
     private _videoServiceType: number
     private _videoUrl: string
-    private _videoUrlUnique: string
     private _userId: string
 
     constructor(params: Params) {
         this._videoTitle = params.video_title
         this._videoServiceType = params.video_service_type
         this._videoUrl = params.video_url
-        this._videoUrlUnique = params.video_url_unique
         this._userId = params.user_id
     }
 
@@ -58,10 +55,6 @@ export class CreateVideoHistoryRequest {
 
     get videoUrl(): string {
         return this._videoUrl
-    }
-
-    get videoUrlUnique(): string {
-        return this._videoUrlUnique
     }
 
     get userId(): string {

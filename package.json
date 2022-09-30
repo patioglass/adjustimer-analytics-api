@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/patioglass/adjustimer-analytics-api#readme",
   "dependencies": {
+    "@types/luxon": "^3.0.1",
     "express": "^4.18.1",
+    "luxon": "^3.0.4",
     "moment-timezone": "^0.5.37",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",

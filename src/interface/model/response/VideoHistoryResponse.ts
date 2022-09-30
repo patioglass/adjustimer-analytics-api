@@ -5,7 +5,6 @@ interface VideoHistoryResponse {
     videoTitle: string
     videoServiceType: number
     videoUrl: string
-    videoUrlUnique: string
     userId: string
 }
 
