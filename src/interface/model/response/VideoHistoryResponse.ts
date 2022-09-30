@@ -12,6 +12,13 @@ interface VideoHistoryResponse {
 export type CreateVideoHistoryResponse = BaseResponse<VideoHistoryResponse>
 
 export class VideoHistorySerializer {
+    public videoHistories(videoHistory: VideoHistory[]): CreateVideoHistoryResponse {
+        return {
+            code: 200,
+            data: videoHistory
+        }
+    }
+
     public videoHistory(videoHistory: VideoHistory): CreateVideoHistoryResponse {
         return {
             code: 200,

@@ -10,8 +10,15 @@ typeOrmConnection.connect()
 const videoHistoryController = new controller.VideoHistoryController(typeOrmConnection);
 
 // todo: いずれ、何かで表示したくなった時に実装
-router.get('/', (req: express.Request, res: express.Response) => {
-
+router.get('/', (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+) => {
+    (async () => {
+        const result = await videoHistoryController.getAllVideoHistory()
+        res.send(result)
+    })().catch(next)
 });
 
 // post request

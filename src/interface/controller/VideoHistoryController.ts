@@ -10,10 +10,21 @@ import { BadRequestException } from "../../exception/HttpErrorException";
 class VideoHistoryController {
     private videoHistoryRepository: VideoHistoryRepository
     private videoHistorySerializer: VideoHistorySerializer
+    private videoHistoryService: VideoHistorySerive
 
     constructor(typeOrmConnection: TypeOrmConnection) {
         this.videoHistoryRepository = new TypeOrmVideoHistoryRepository(typeOrmConnection)
         this.videoHistorySerializer = new VideoHistorySerializer()
+        this.videoHistoryService = new VideoHistorySerive(this.videoHistoryRepository)
+    }
+
+    public async getAllVideoHistory(): Promise<CreateVideoHistoryResponse[] | CreateVideoHistoryResponse> {
+        try {
+            const result = await this.videoHistoryService.getAllVideoHistory()
+            return this.videoHistorySerializer.videoHistories(result)
+        } catch (error: any) {
+            return this.videoHistorySerializer.error(error)
+        }
     }
 
     public async createVideoHistory(
@@ -22,7 +33,6 @@ class VideoHistoryController {
         try {
             const reqBody = new CreateVideoHistoryRequest(req.body)
             if (reqBody.validate()) {
-                const videoHistoryService = new VideoHistorySerive(this.videoHistoryRepository)
                 const newVideoHistory = new VideoHistory(
                     reqBody.videoTitle,
                     reqBody.videoServiceType,
@@ -31,7 +41,7 @@ class VideoHistoryController {
                     reqBody.userId,
                     new Date()
                 )
-                const result = await videoHistoryService.createVideoHistory(newVideoHistory)
+                const result = await this.videoHistoryService.createVideoHistory(newVideoHistory)
                 return this.videoHistorySerializer.videoHistory(result)
             } else {
                 throw BadRequestException()

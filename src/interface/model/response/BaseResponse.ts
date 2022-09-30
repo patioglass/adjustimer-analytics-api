@@ -4,6 +4,10 @@ export type BaseResponse<T> =
         data: T
     }
     | {
+        code: 200
+        data: T[]
+    }
+    | {
         code: 400 | 500
         message?: string
     }
